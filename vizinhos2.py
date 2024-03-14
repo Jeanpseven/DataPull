@@ -1,16 +1,7 @@
-import requests
-import time
-import re
 import os
 import platform
 
 def clear():
-    if platform.system() == "Windows":
-        os.system("cls")
-    elif platform.system() == "Linux":
-        os.system("clear")
-    else:
-        os.system("clear")
     print("--------=DEDSEC=Wrench=--------")
 
 R='\033[1;31m'
@@ -38,7 +29,7 @@ def main():
         cpf = input(f'{C}[{G}*{C}] Informe o CPF a ser consultado (sem espaço, sem ponto e sem traço):')
         cpf = cpf.replace(' ', '').replace('.', '').replace('-', '')  # Remover espaços, pontos e traços
         nome_filtro = input(f'{C}[{G}*{C}] Informe o nome a ser filtrado:')
-        filtrar_por_nome(cpf, nome_filtro)
+        salvar_nomes_vizinhos(cpf, nome_filtro)
     elif tool == '2':
         clear()
         import consulta
@@ -53,19 +44,16 @@ def main():
         time.sleep(0.2)
         main()
 
-def filtrar_por_nome(cpf, nome_filtro):
-    while True:
-        nomes = requests.get(f"https://tudosobretodos.info/{cpf}").text
-        viz = re.findall(r"[A-Z][a-z]+ [A-Z][a-z]+", nomes)
-        filtered_viz = [v for v in viz if nome_filtro.lower() in v.lower()]
-        if filtered_viz:
-            print(f'\n{code_result} Vizinhos encontrados:')
-            for vizinho in filtered_viz:
-                print(f'{code_result} - {vizinho}')
-            break
+def salvar_nomes_vizinhos(cpf, nome_filtro):
+    nomes_arquivo = f"{cpf}_vizinhos.log"
+    with open(nomes_arquivo, 'a+') as f:
+        f.seek(0)  # Mover o cursor para o início do arquivo
+        nomes_salvos = f.read().splitlines()
+        
+        if nome_filtro not in nomes_salvos:
+            f.write(nome_filtro + '\n')
+            print(f'{code_result} Nome salvo com sucesso!')
         else:
-            print(f'{code_error} Nenhum vizinho encontrado com o nome "{nome_filtro}". Tente novamente.')
-            nome_filtro = input(f'{C}[{G}*{C}] Informe outro nome a ser filtrado:')
-            time.sleep(1)  # Aguardar um segundo antes de tentar novamente
+            print(f'{code_error} O nome "{nome_filtro}" já foi salvo anteriormente.')
 
 main()
