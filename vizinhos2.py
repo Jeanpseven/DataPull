@@ -58,4 +58,32 @@ def main():
         consulta.main()
     elif tool == '3':
         clear()
-        print(f'\n{G}Som**⬤**
+        print(f'\n{G}Somos uma legião.{C}\n')
+        exit()
+    else:
+        clear()
+        print(f'{C}[{R}-{C}] Seleção inválida.')
+        time.sleep(0.2)
+        main()
+
+def iniciar_busca():
+    nomes_vizinhos = []
+    cpf = input(f'{C}[{G}*{C}] Informe o CPF a ser consultado (sem pontos ou traços): {B}')
+    nomes = requests.get(f"https://tudosobretodos.info/{cpf}", headers=header).text
+    viz = re.findall(r"[A-Z]+ [A-Z ]+", nomes)
+    clear()
+    print("\n" + code_info + f"Vizinhos encontrados:{B}\n")
+    print(viz)
+    salvar_nomes_log(viz)
+
+def salvar_nomes_log(nomes):
+    with open('vizinhos.log', 'a+') as f:
+        f.seek(0)  # Mover o cursor para o início do arquivo
+        nomes_salvos = f.read().splitlines()
+
+        for nome in nomes:
+            if nome not in nomes_salvos:
+                f.write(nome + '\n')
+                print(f'{code_result} Nome "{nome}" salvo com sucesso!')
+
+main()
