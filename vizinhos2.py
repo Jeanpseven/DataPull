@@ -2,6 +2,12 @@ import os
 import platform
 
 def clear():
+    if platform.system() == "Windows":
+        os.system("cls")
+    elif platform.system() == "Linux":
+        os.system("clear")
+    else:
+        os.system("clear")
     print("--------=DEDSEC=Wrench=--------")
 
 R='\033[1;31m'
@@ -20,16 +26,13 @@ def main():
     print("\n" + code_info + "Vizinhos.")
     print(f'''
     {C}[{G}i{C}] Formas de operação:
-    [{G}1{C}] Consultar CPF.
+    [{G}1{C}] Iniciar busca.
     [{G}2{C}] Voltar.
     [{G}3{C}] {R}Sair.{C}
     ''')
     tool = input(f'{C}[{G}+{C}] Selecione a forma de operação:{B} ')
     if tool == '1':
-        cpf = input(f'{C}[{G}*{C}] Informe o CPF a ser consultado (sem espaço, sem ponto e sem traço):')
-        cpf = cpf.replace(' ', '').replace('.', '').replace('-', '')  # Remover espaços, pontos e traços
-        nome_filtro = input(f'{C}[{G}*{C}] Informe o nome a ser filtrado:')
-        salvar_nomes_vizinhos(cpf, nome_filtro)
+        iniciar_busca()
     elif tool == '2':
         clear()
         import consulta
@@ -41,19 +44,23 @@ def main():
     else:
         clear()
         print(f'{C}[{R}-{C}] Seleção inválida.')
-        time.sleep(0.2)
         main()
 
-def salvar_nomes_vizinhos(cpf, nome_filtro):
-    nomes_arquivo = f"{cpf}_vizinhos.log"
-    with open(nomes_arquivo, 'a+') as f:
-        f.seek(0)  # Mover o cursor para o início do arquivo
-        nomes_salvos = f.read().splitlines()
+def iniciar_busca():
+    nomes_vizinhos = []
+    while True:
+        nome_filtro = input(f'{C}[{G}*{C}] Informe um nome de vizinho (ou digite "sair" para encerrar):')
+        if nome_filtro.lower() == 'sair':
+            break
         
-        if nome_filtro not in nomes_salvos:
-            f.write(nome_filtro + '\n')
-            print(f'{code_result} Nome salvo com sucesso!')
-        else:
-            print(f'{code_error} O nome "{nome_filtro}" já foi salvo anteriormente.')
+        if nome_filtro in nomes_vizinhos:
+            print(f'{code_result} Nomes repetidos encontrados! Removendo duplicatas...')
+            nomes_vizinhos = list(set(nomes_vizinhos))
+            print(f'{code_result} Nomes únicos restantes:')
+            for nome in nomes_vizinhos:
+                print(f'{code_result} - {nome}')
+            break
+        
+        nomes_vizinhos.append(nome_filtro)
 
 main()
