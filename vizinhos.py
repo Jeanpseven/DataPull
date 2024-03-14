@@ -54,8 +54,7 @@ def main():
 
 def vizinhos(num):
    cpf = num
-   nomes = requests.get(
-r"https://tudosobretodos.info/{}".format(num))
+   nomes = requests.get(r"https://tudosobretodos.info/{}".format(num)).text
    viz = re.findall(r"[A-Z]+ [A-Z ]+", nomes)
    clear()
    print("\n" + code_info + f"Vizinhos encontrados:{B}\n")
