@@ -29,7 +29,8 @@ def main():
     ''')
     tool=input(f'{C}[{G}+{C}] Selecione a forma de operação:{B} ')
     if tool=='1':
-        cpf=input(f'{C}[{G}*{C}] Informe o CPF a ser consultado (sem >')
+        cpf=input(f'{C}[{G}*{C}] Informe o CPF a ser consultado :')
+        cpf = cpf.replace(' ', '').replace('.', '').replace('-', '')  # Remover espaços, pontos e traços
         filtrar_por_nome(cpf)
     elif tool=='2':
         clear()
