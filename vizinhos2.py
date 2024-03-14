@@ -1,3 +1,6 @@
+import requests
+import time
+import re
 import os
 import platform
 
@@ -8,24 +11,28 @@ def clear():
         os.system("clear")
     else:
         os.system("clear")
-    print("--------=DEDSEC=Wrench=--------")
+    print("----------=----------")
 
 R='\033[1;31m'
 B='\033[1;34m'
 C='\033[1;37m'
 Y='\033[1;33m'
 G='\033[1;32m'
+RT='\033[;0m'
 
 code_info = C + '[' + Y + 'i' + C + '] '
 code_details = C + '[' + G + '*' + C + '] '
 code_result = C + '[' + G + '+' + C + '] '
 code_error = C + '[' + R + '!' + C + '] '
 
+clear()
+
 def main():
     clear()
     print("\n" + code_info + "Vizinhos.")
     print(f'''
-    {C}[{G}i{C}] Formas de operação:
+    {C}[{G}i{C}] Formas de operação: 
+
     [{G}1{C}] Iniciar busca.
     [{G}2{C}] Voltar.
     [{G}3{C}] {R}Sair.{C}
@@ -44,23 +51,27 @@ def main():
     else:
         clear()
         print(f'{C}[{R}-{C}] Seleção inválida.')
+        time.sleep(0.2)
         main()
 
 def iniciar_busca():
     nomes_vizinhos = []
-    while True:
-        nome_filtro = input(f'{C}[{G}*{C}] Informe um nome de vizinho (ou digite "sair" para encerrar):')
-        if nome_filtro.lower() == 'sair':
-            break
-        
-        if nome_filtro in nomes_vizinhos:
-            print(f'{code_result} Nomes repetidos encontrados! Removendo duplicatas...')
-            nomes_vizinhos = list(set(nomes_vizinhos))
-            print(f'{code_result} Nomes únicos restantes:')
-            for nome in nomes_vizinhos:
-                print(f'{code_result} - {nome}')
-            break
-        
-        nomes_vizinhos.append(nome_filtro)
+    cpf = input(f'{C}[{G}*{C}] Informe o CPF a ser consultado (sem pontos ou traços): {B}')
+    nomes = requests.get(f"https://tudosobretodos.info/{cpf}", headers=header).text
+    viz = re.findall(r"[A-Z]+ [A-Z ]+", nomes)
+    clear()
+    print("\n" + code_info + f"Vizinhos encontrados:{B}\n")
+    print(viz)
+    salvar_nomes_log(viz)
+
+def salvar_nomes_log(nomes):
+    with open('vizinhos.log', 'a+') as f:
+        f.seek(0)  # Mover o cursor para o início do arquivo
+        nomes_salvos = f.read().splitlines()
+
+        for nome in nomes:
+            if nome not in nomes_salvos:
+                f.write(nome + '\n')
+                print(f'{code_result} Nome "{nome}" salvo com sucesso!')
 
 main()
