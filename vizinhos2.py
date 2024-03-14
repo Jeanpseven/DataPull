@@ -5,12 +5,6 @@ import os
 import platform
 
 def clear():
-    if platform.system() == "Windows":
-        os.system("cls")
-    elif platform.system() == "Linux":
-        os.system("clear")
-    else:
-        os.system("clear")
     print("--------=DEDSEC=Wrench=--------")
 
 R='\033[1;31m'
@@ -54,14 +48,17 @@ def main():
         main()
 
 def filtrar_por_nome(cpf, nome_filtro):
-    nomes = requests.get(f"https://tudosobretodos.info/{cpf}").text
-    viz = re.findall(r"[A-Z][a-z]+ [A-Z][a-z]+", nomes)
-    filtered_viz = [v for v in viz if nome_filtro.lower() in v.lower()]
-    if filtered_viz:
-        print(f'\n{code_result} Vizinhos encontrados:')
-        for vizinho in filtered_viz:
-            print(f'{code_result} - {vizinho}')
-    else:
-        print(f'{code_error} Nenhum vizinho encontrado com o nome "{nome_filtro}".')
+    while True:
+        nomes = requests.get(f"https://tudosobretodos.info/{cpf}").text
+        viz = re.findall(r"[A-Z][a-z]+ [A-Z][a-z]+", nomes)
+        filtered_viz = [v for v in viz if nome_filtro.lower() in v.lower()]
+        if filtered_viz:
+            print(f'\n{code_result} Vizinhos encontrados:')
+            for vizinho in filtered_viz:
+                print(f'{code_result} - {vizinho}')
+            break
+        else:
+            print(f'{code_error} Nenhum vizinho encontrado com o nome "{nome_filtro}". Tente novamente.')
+            nome_filtro = input(f'{C}[{G}*{C}] Informe outro nome a ser filtrado:')
 
 main()
