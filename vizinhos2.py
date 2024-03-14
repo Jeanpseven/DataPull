@@ -5,6 +5,12 @@ import os
 import platform
 
 def clear():
+    if platform.system() == "Windows":
+        os.system("cls")
+    elif platform.system() == "Linux":
+        os.system("clear")
+    else:
+        os.system("clear")
     print("--------=DEDSEC=Wrench=--------")
 
 R='\033[1;31m'
@@ -60,5 +66,6 @@ def filtrar_por_nome(cpf, nome_filtro):
         else:
             print(f'{code_error} Nenhum vizinho encontrado com o nome "{nome_filtro}". Tente novamente.')
             nome_filtro = input(f'{C}[{G}*{C}] Informe outro nome a ser filtrado:')
+            time.sleep(1)  # Aguardar um segundo antes de tentar novamente
 
 main()
