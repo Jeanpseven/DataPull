@@ -28,6 +28,13 @@ Y = '\033[1;33m'  # Amarelo
 G = '\033[1;32m'  # Verde
 RT = '\033[;0m'   # Reset
 
+
+# Outras variáveis específicas do seu código
+code_info = C + '[' + Y + 'i' + C + '] '
+code_details = C + '[' + G + '*' + C + '] '
+code_result = C + '[' + G + '+' + C + '] '
+code_error = C + '[' + R + '!' + C + '] '
+
 def clear():
    print("-------DEDSEC Wrench-------")
 
