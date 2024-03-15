@@ -18,6 +18,14 @@ except:
    print(code_result + "Instalado com sucesso.\n")
    main()
 
+# Definindo constantes de cores
+R = '\033[1;31m'  # Vermelho
+B = '\033[1;34m'  # Azul
+C = '\033[1;37m'  # Cinza
+Y = '\033[1;33m'  # Amarelo
+G = '\033[1;32m'  # Verde
+RT = '\033[;0m'   # Reset
+
 def clear():
    print("-------DEDSEC Wrench-------")
 
