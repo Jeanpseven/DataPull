@@ -18,6 +18,8 @@ except:
    print(code_result + "Instalado com sucesso.\n")
    main()
 
+version = "2.0"
+
 # Definindo constantes de cores
 R = '\033[1;31m'  # Vermelho
 B = '\033[1;34m'  # Azul
