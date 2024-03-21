@@ -2,7 +2,7 @@
 
 import os, requests, time
 import platform
-import ipadress
+import ipaddress
 
 def clear():
    if platform.system() == "Windows":
