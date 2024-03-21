@@ -2,6 +2,7 @@
 
 import os, requests, time
 import platform
+import ipadress
 
 def clear():
    if platform.system() == "Windows":
@@ -88,37 +89,44 @@ def maps(ip):
 #Snuking/Somos uma legião. 2021 ©
 
 def consultar(ip):
+  try:
+    ip_address = ipaddress.ip_address(ip)
+  except ipaddress.AddressValueError:
+    print(f"{code_error} Invalid IP address.")
+    return
+
   clear()
   api = requests.get(f"https://ipapi.co/{ip}/json")
+  if api.status_code != 200:
+    print(f"{code_error} Error fetching information for IP address {ip}.")
+    return
+
   resultado = api.json()
-  ip = resultado['ip']
-  print("\n" + f"{C}Endereço de IP: {B}{resultado['ip']}{C}")
-  print(f"Cidade: {B}{resultado['city']}{C}")
-  print(f"Região: {B}{resultado['region']}{C}")
-  print(f"País: {B}{resultado['country_name']}{C}")
-  print(f"Abreviação do país: {B}{resultado['country']}{C}")
-  print(f"Capital do país: {B}{resultado['country_capital']}{C}")
-  print(f"População do país: {B}{resultado['country_population']}{C}")
-  print(f"Moeda: {B}{resultado['currency']}{C}")
-  print(f"Nome da moeda: {B}{resultado['currency_name']}{C}")
-  print(f"Código da região: {B}{resultado['region_code']}{C}")
-  print(f"Código postal: {B}{resultado['postal']}{C}")
-  print(f"Código do país: {B}{resultado['country_code']}{C}")
-  print(f"Código do país ISO3: {B}{resultado['country_code_iso3']}{C}")
-  print(f"Área do país: {B}{resultado['country_area']}{C}")
-  print(f"País TLD: {B}{resultado['country_tld']}{C}")
-  print(f"Código área: {B}{resultado['country_area']}{C}")
-  print(f"Código do continente: {B}{resultado['continent_code']}{C}")
-  print(f"União Européia: {B}{resultado['in_eu']}{C}")
-  print(f"Latitude: {B}{resultado['latitude']}{C}")
-  print(f"Longitude: {B}{resultado['longitude']}{C}")
-  print(f"Fuso horário: {B}{resultado['timezone']}{C}")
-  print(f"Código de Chamada: {B}{resultado['country_calling_code']}{C}")
-  print(f"línguas: {B}{resultado['languages']}{C}")
-  print(f"ASN: {B}{resultado['asn']}{C}")
-  print(f"ORG: {B}{resultado['org']}{C}")
-  print(f"Deslocamento UTF: {B}{resultado['utc_offset']}{C}")
-  print(f"Versão: {B}{resultado['version']}{C}")
+  print(f"{code_info} IP address {ip} information:")
+  print(f"{code_details} IP address: {resultado['ip']}")
+  print(f"{code_details} City: {resultado['city']}")
+  print(f"{code_details} Region: {resultado['region']}")
+  print(f"{code_details} Country: {resultado['country_name']}")
+  print(f"{code_details} Country code: {resultado['country_code']}")
+  print(f"{code_details} Country code ISO3: {resultado['country_code_iso3']}")
+  print(f"{code_details} Country population: {resultado['country_population']}")
+  print(f"{code_details} Country currency: {resultado['currency']}")
+  print(f"{code_details} Country currency name: {resultado['currency_name']}")
+  print(f"{code_details} Country area: {resultado['country_area']}")
+  print(f"{code_details} Country TLD: {resultado['country_tld']}")
+  print(f"{code_details} Country calling code: {resultado['country_calling_code']}")
+  print(f"{code_details} Region code: {resultado['region_code']}")
+  print(f"{code_details} Postal code: {resultado['postal']}")
+  print(f"{code_details} Continent code: {resultado['continent_code']}")
+  print(f"{code_details} In EU: {resultado['in_eu']}")
+  print(f"{code_details} Timezone: {resultado['timezone']}")
+  print(f"{code_details} Latitude: {resultado['latitude']}")
+  print(f"{code_details} Longitude: {resultado['longitude']}")
+  print(f"{code_details} UTC offset: {resultado['utc_offset']}")
+  print(f"{code_details} Languages: {resultado['languages']}")
+  print(f"{code_details} ASN: {resultado['asn']}")
+  print(f"{code_details} ORG: {resultado['org']}")
+  print(f"{code_details} Version: {resultado['version']}")
   maps(ip)
 
 
