@@ -3,6 +3,18 @@
 import os, requests, time
 import platform
 
+ip = ''
+try:
+    response = requests.get('https://api.ipdata.co?api-key=test')
+    resultado = response.json()
+    ip = resultado['ip']
+    print(f"{code_info} IP: {ip}")
+except Exception as e:
+    clear()
+    print(f"{code_error} Something went wrong. Please try again.{C}")
+    time.sleep(0.2)
+    main()
+
 def clear():
   print("------DEDSEC-WRENCH-------")
 
