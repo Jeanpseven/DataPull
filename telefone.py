@@ -689,7 +689,7 @@ def main():
   tool=input(f'{C}[{G}+{C}] Selecione a forma de operação:{B} ')
 
   if tool=='1':
-       args.number = input(f"{C}[{G}*{C}] Informe os números (sem espaços, parênteses e traço): {B}")
+       args.number = input(f"{C}[{G}*{C}] Informe os números (sem espaços, parênteses e traço(formato 551612345678)): {B}")
        scanNumber(args.number)
   elif tool=='2':
         clear()
