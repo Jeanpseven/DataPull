@@ -10,7 +10,6 @@ try:
     ip = resultado['ip']
     print(f"{code_info} IP: {ip}")
 except Exception as e:
-    clear()
     print(f"{code_error} Something went wrong. Please try again.{C}")
     time.sleep(0.2)
     main()
