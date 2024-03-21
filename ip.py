@@ -2,10 +2,14 @@
 
 import os, requests, time
 import platform
-import ipaddress
 
 def clear():
-   print("-------=DEDSEC=WRENCH=--------")
+   if platform.system() == "Windows":
+      os.system("cls")
+   elif platform.system() == "Linux":
+      os.system("clear")
+   else:
+       os.system("clear")
 
 R='\033[1;31m'; B='\033[1;34m'; C='\033[1;37m'; Y='\033[1;33m'; G='\033[1;32m'; RT='\033[;0m'
 
@@ -36,7 +40,7 @@ def main():
   elif tool == "2":
      ip=input(f'{C}[{G}*{C}] Informe o IP a ser consultado (COM pontos): {B}')
      consultar(ip)
-  elif tool == "3":
+  elif tool =="3":
      ip=input(f'{C}[{G}*{C}] Informe o IP a ser consultado (COM pontos): {B}')
      clear()
      localizar(ip)
@@ -93,41 +97,38 @@ def consultar(ip):
   import requests
 
 def consultar(ip):
-  try:
-    api = requests.get(f"https://ipapi.co/{ip}/json")
-    resultado = api.json()
-    ip = resultado['ip']
-    print("\n" + f"{C}Endereço de IP: {B}{resultado['ip']}{C}")
-    print(f"Cidade: {B}{resultado['city']}{C}")
-    print(f"Região: {B}{resultado['region']}{C}")
-    print(f"País: {B}{resultado['country_name']}{C}")
-    print(f"Abreviação do país: {B}{resultado['country']}{C}")
-    print(f"Capital do país: {B}{resultado['country_capital']}{C}")
-    print(f"População do país: {B}{resultado['country_population']}{C}")
-    print(f"Moeda: {B}{resultado['currency']}{C}")
-    print(f"Nome da moeda: {B}{resultado['currency_name']}{C}")
-    print(f"Código da região: {B}{resultado['region_code']}{C}")
-    print(f"Código postal: {B}{resultado['postal']}{C}")
-    print(f"Código do país: {B}{resultado['country_code']}{C}")
-    print(f"Código do país ISO3: {B}{resultado['country_code_iso3']}{C}")
-    print(f"Área do país: {B}{resultado['country_area']}{C}")
-    print(f"País TLD: {B}{resultado['country_tld']}{C}")
-    print(f"Código área: {B}{resultado['country_area']}{C}")
-    print(f"Código do continente: {B}{resultado['continent_code']}{C}")
-    print(f"União Européia: {B}{resultado['in_eu']}{C}")
-    print(f"Latitude: {B}{resultado['latitude']}{C}")
-    print(f"Longitude: {B}{resultado['longitude']}{C}")
-    print(f"Fuso horário: {B}{resultado['timezone']}{C}")
-    print(f"Código de Chamada: {B}{resultado['country_calling_code']}{C}")
-    print(f"línguas: {B}{resultado['languages']}{C}")
-    print(f"ASN: {B}{resultado['asn']}{C}")
-    print(f"ORG: {B}{resultado['org']}{C}")
-    print(f"Deslocamento UTF: {B}{resultado['utc_offset']}{C}")
-    print(f"Versão: {B}{resultado['version']}{C}")
-    maps(ip)
-  except requests.exceptions.RequestException as e:
-    print(f"{code_error} Error fetching IP information: {e}")
-
+  clear()
+  api = requests.get(f"https://ipapi.co/{ip}/json")
+  resultado = api.json()
+  ip = resultado['ip']
+  print("\n" + f"{C}Endereço de IP: {B}{resultado['ip']}{C}")
+  print(f"Cidade: {B}{resultado['city']}{C}")
+  print(f"Região: {B}{resultado['region']}{C}")
+  print(f"País: {B}{resultado['country_name']}{C}")
+  print(f"Abreviação do país: {B}{resultado['country']}{C}")
+  print(f"Capital do país: {B}{resultado['country_capital']}{C}")
+  print(f"População do país: {B}{resultado['country_population']}{C}")
+  print(f"Moeda: {B}{resultado['currency']}{C}")
+  print(f"Nome da moeda: {B}{resultado['currency_name']}{C}")
+  print(f"Código da região: {B}{resultado['region_code']}{C}")
+  print(f"Código postal: {B}{resultado['postal']}{C}")
+  print(f"Código do país: {B}{resultado['country_code']}{C}")
+  print(f"Código do país ISO3: {B}{resultado['country_code_iso3']}{C}")
+  print(f"Área do país: {B}{resultado['country_area']}{C}")
+  print(f"País TLD: {B}{resultado['country_tld']}{C}")
+  print(f"Código área: {B}{resultado['country_area']}{C}")
+  print(f"Código do continente: {B}{resultado['continent_code']}{C}")
+  print(f"União Européia: {B}{resultado['in_eu']}{C}")
+  print(f"Latitude: {B}{resultado['latitude']}{C}")
+  print(f"Longitude: {B}{resultado['longitude']}{C}")
+  print(f"Fuso horário: {B}{resultado['timezone']}{C}")
+  print(f"Código de Chamada: {B}{resultado['country_calling_code']}{C}")
+  print(f"línguas: {B}{resultado['languages']}{C}")
+  print(f"ASN: {B}{resultado['asn']}{C}")
+  print(f"ORG: {B}{resultado['org']}{C}")
+  print(f"Deslocamento UTF: {B}{resultado['utc_offset']}{C}")
+  print(f"Versão: {B}{resultado['version']}{C}")
+  maps(ip)
 
 def localizar(ip):
   api = requests.get("https://ipapi.co/json")
@@ -138,7 +139,7 @@ def localizar(ip):
   print ('\n' + code_result + f'Google Maps: {Y}' + 'https://www.google.com/maps/place/' + f"{resultado['latitude']}" + '+' + f"{resultado['longitude']}")
   again()
 
-
-main()
+if __name__ == "__main__":
+  main()
 
 #Snuking/Somos uma legião. 2021 ©
