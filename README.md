@@ -94,14 +94,13 @@ Tipo de linha;
 [+] Instalação:
 Para instalar no seu terminal, siga os comandos:
 
-''apt update -y && apt upgrade -y''
-''apt instala python''
-''apt install git''
-''git clone https://github.com/Snuking/snuking/''
-''ls''
-''cd snuking''
-''python install.py''
-''python consulta.py''
+apt update -y && apt upgrade -y
+apt instala python
+apt install git
+git clone https://github.com/Snuking/snuking/
+ls
+cd snuking
+python install.py
+python consulta.py
 
-© Snuking,
-2021
+
