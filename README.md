@@ -1,16 +1,6 @@
-꧁ঔৣ☬ 🆂🅽🆄🅺🅸🅽🅶 ☬ঔৣ꧂
+Baseado no código do Snuking
 
-Copyright (c) 2021 Snuking.
-
-[+] Descrição:
-Snuking, a ferramenta para consulta, 
-trata-se de um sistema avançado, em Python,
-que ”puxa" dados de: IP, nome, CPF, CEP, CNPJ, placa e telefone.
-
-Os scripts possuem características autorais e, seu
-uso para quaisquer meios sem vínculo pedagógico ou
-educacional, é proibido. Não possui intenção comercial,
-portanto, não está a venda dos direitos.
+botcompleto: https://t.me/AnoninoBuscasOfcBot
 
 [+] As informações obtidas:
 IP:
