@@ -92,16 +92,16 @@ Operadora;
 Tipo de linha;
 
 [+] Instalação:
-Para instalar no seu Termux, siga os comandos:
+Para instalar no seu terminal, siga os comandos:
 
-apt update && apt upgrade
-apt instala python
-pkg install git
-git clone https://github.com/Snuking/snuking/
-ls
-cd snuking
-python install.py
-python consulta.py
+''apt update -y && apt upgrade -y''
+''apt instala python''
+''apt install git''
+''git clone https://github.com/Snuking/snuking/''
+''ls''
+''cd snuking''
+''python install.py''
+''python consulta.py''
 
 © Snuking,
 2021
